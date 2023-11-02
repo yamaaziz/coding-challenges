@@ -1,21 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 
-
-def count_bytes(data):
-    return len(data)
-
-
-def count_lines(data):
-    return data.count(b"\n")
-
-
-def count_words(data):
-    return len(data.split())
-
-
-def count_chars(data):
-    return len(data.decode("utf-8"))
+import utilities
 
 
 def main(args):
@@ -25,19 +11,19 @@ def main(args):
     line_count = word_count = byte_count = char_count = 0
 
     if args.bytes:
-        byte_count = count_bytes(data)
+        byte_count = utilities.count_bytes(data)
     if args.lines:
-        line_count = count_lines(data)
+        line_count = utilities.count_lines(data)
     if args.words:
-        word_count = count_words(data)
+        word_count = utilities.count_words(data)
     if args.chars:
-        char_count = count_chars(data)
+        char_count = utilities.count_chars(data)
 
     if all([args.bytes, args.lines, args.words, args.chars]) is False:
-        byte_count = count_bytes(data)
-        line_count = count_lines(data)
-        word_count = count_words(data)
-        char_count = count_chars(data)
+        byte_count = utilities.count_bytes(data)
+        line_count = utilities.count_lines(data)
+        word_count = utilities.count_words(data)
+        char_count = utilities.count_chars(data)
 
     return {
         "line_count": line_count,
