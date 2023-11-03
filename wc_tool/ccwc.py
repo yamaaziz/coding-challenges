@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 
-import utilities
+from wc_tool import utilities
 
 
 def main(args):
@@ -25,12 +25,29 @@ def main(args):
         word_count = utilities.count_words(data)
         char_count = utilities.count_chars(data)
 
-    return {
+    result = {
         "line_count": line_count,
         "word_count": word_count,
         "byte_count": byte_count,
         "char_count": char_count,
     }
+
+    if args.lines:
+        print(f"Line count: {result['line_count']}")
+    if args.words:
+        print(f"Word count: {result['word_count']}")
+    if args.bytes:
+        print(f"Byte count: {result['byte_count']}")
+    if args.chars:
+        print(f"Char count: {result['char_count']}")
+    if not (args.lines or args.words or args.bytes or args.chars):
+        # If no option is provided, print all counts
+        print(f"Line count: {result['line_count']}")
+        print(f"Word count: {result['word_count']}")
+        print(f"Byte count: {result['byte_count']}")
+        print(f"Char count: {result['char_count']}")
+
+    return result
 
 
 if __name__ == "__main__":
@@ -42,19 +59,4 @@ if __name__ == "__main__":
     parser.add_argument("file", type=argparse.FileType(mode="rb"))
 
     args = parser.parse_args()
-    result = main(args)
-
-    if args.lines:
-        print(f"Line count: {result['line_count']}")
-    if args.words:
-        print(f"Word count: {result['word_count']}")
-    if args.bytes:
-        print(f"Byte count: {result['byte_count']}")
-    if args.chars:
-        print(f"Char count: {result['char_count']}")
-    elif not (args.lines or args.words or args.bytes or args.chars):
-        # If no option is provided, print all counts
-        print(f"Line count: {result['line_count']}")
-        print(f"Word count: {result['word_count']}")
-        print(f"Byte count: {result['byte_count']}")
-        print(f"Char count: {result['char_count']}")
+    main(args)
