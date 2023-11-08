@@ -11,7 +11,7 @@ source .env
 pip install -r wc_tool/requirements.txt
 ```
 ## Tests
-`pytest`
+`pytest wc_tool/`
 ## Usage
 ```
 python wc_tool/ccwc.py --bytes wc_tool/test.txt
